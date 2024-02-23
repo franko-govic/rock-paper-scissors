@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booleans</title>
+  <style>
+    body {
+      background-color: rgb(23, 22, 22);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .rps {
+      width: 7%;
+      border: 4px solid white;
+      border-radius: 50%;
+      padding: 2rem;
+    }
+
+    .rps:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+    } 
+
+    .rps:active {
+      transform: scale(0.98);
+    }
+
+    #result {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    #user,
+    #bot {
+      width: 10%;
+    }
+
+    #choice {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <img class="rps" src="rps/rock-emoji.png" onclick="rock()">
+  <img class="rps" src="rps/paper-emoji.png" onclick="paper()">
+  <img class="rps" src="rps/scissors-emoji.png" onclick="scissors()">
+
+  <p id="result">Result</p>
+  <div id="choice">You <img id="user">VS<img id="bot"> Computer</div>
+
+  <p id="statistics">
+    Wins: <span id="wins">0</span>,
+    Losses: <span id="losses">0</span>,
+    Ties: <span id="ties">0</span>
+  </p>
+
+  <button id="resetBtn" onclick="reset()">Reset Score</button>
+
+  <script>
+    const options = ["rock", "paper", "scissors"];
+
+    const rockSrc = "rps/rock-emoji.png";
+    const paperSrc = "rps/paper-emoji.png";
+    const scissorsSrc = "rps/scissors-emoji.png";
+
+    let result = document.getElementById("result");
+    let choice = document.getElementById("choice");
+
+    let wins = document.getElementById("wins");
+    let losses = document.getElementById("losses");
+    let ties = document.getElementById("ties");
+
+    let user = document.getElementById("user");
+    let bot = document.getElementById("bot");
+
+    
+      
+    function paper() {
+
+      let comp = options[Math.floor(Math.random() * options.length)]; 
+      user.setAttribute("src", paperSrc);
+      choice.style.display = "block";
+      result.style.display = "block";
+      switch(comp){
+        
+        case "rock":
+          result.innerHTML= "You win";
+          bot.setAttribute("src", rockSrc);
+          wins.innerHTML++;
+          break;
+        case "paper":
+          result.innerHTML= "It's a tie";
+          bot.setAttribute("src", paperSrc);
+          ties.innerHTML++;
+          break;
+        case "scissors":
+          result.innerHTML= "You loose";
+          bot.setAttribute("src", scissorsSrc);
+          losses.innerHTML++;
+          break;
+        default:
+          result.innerHTML= "Result";
+     }  
+    }
+
+    function rock() {
+
+      let comp = options[Math.floor(Math.random() * options.length)]; 
+      user.setAttribute("src", rockSrc);
+      choice.style.display = "block";
+      result.style.display = "block";
+      switch(comp){
+        
+        case "rock":
+          result.innerHTML= "It's a tie";
+          bot.setAttribute("src", rockSrc);
+          ties.innerHTML++;
+          break;
+        case "paper":
+          result.innerHTML= "You loose";
+          bot.setAttribute("src", paperSrc);
+          losses.innerHTML++;
+          break;
+        case "scissors":
+          result.innerHTML= "You win";
+          bot.setAttribute("src", scissorsSrc);
+          wins.innerHTML++;
+          break;
+        default:
+          result.innerHTML= "Result";
+      }  
+     }
+
+     function scissors() {
+
+      let comp = options[Math.floor(Math.random() * options.length)]; 
+      user.setAttribute("src", scissorsSrc);
+      choice.style.display = "block";
+      result.style.display = "block";
+      switch(comp){
+        
+        case "rock":
+          result.innerHTML= "You loose";
+          bot.setAttribute("src", rockSrc);
+          losses.innerHTML++;
+          break;
+        case "paper":
+          result.innerHTML= "You win";
+          bot.setAttribute("src", paperSrc);
+          wins.innerHTML++;
+          break;
+        case "scissors":
+          result.innerHTML= "It's a tie";
+          bot.setAttribute("src", scissorsSrc);
+          ties.innerHTML++;
+          break;
+        default:
+          result.innerHTML= "Result";
+      }  
+      }
+
+      function reset() {
+        wins.innerHTML = 0;
+        losses.innerHTML = 0;
+        ties.innerHTML = 0;
+        result.innerHTML = "Result";
+        choice.style.display = "none";
+      }
+  </script>
+</body>
+</html>
